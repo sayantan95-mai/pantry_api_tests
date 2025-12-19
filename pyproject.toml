@@ -1,0 +1,16 @@
+[project]
+name = "fakeapi-testing"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "pytest>=9.0.2",
+    "pytest-html>=4.1.1",
+    "pytest-playwright>=0.7.2",
+    "requests>=2.32.5",
+]
+
+[tool.pytest.ini_options]
+pythonpath = "."
+addopts = "--html=report.html"
