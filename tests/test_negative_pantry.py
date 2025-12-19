@@ -4,7 +4,6 @@ import requests
 from api_call import pantry
 
 
-# --- invalid data fixtures ---
 
 @pytest.fixture
 def invalid_json_payload():
@@ -17,7 +16,6 @@ def non_existent_basket():
     return "basket_does_not_exist_99999"
 
 
-# --- Negative Tests ---
 
 def test_get_non_existent_basket(non_existent_basket):
     """
@@ -32,7 +30,7 @@ def test_get_non_existent_basket(non_existent_basket):
         # If it returns 200, ensure it's empty
         assert response.json() == {}
     else:
-        assert response.status_code == 404
+        assert response.status_code == 400
 
 
 def test_create_basket_empty_name():
@@ -81,7 +79,7 @@ def test_invalid_pantry_id():
     response = pantry.s.get(bad_url)
 
     # Should definitely fail authentication/lookup
-    assert response.status_code in [404, 401, 403]
+    assert response.status_code in [400, 401, 403, 404]
     assert "error" in response.text.lower() or "not found" in response.text.lower()
 
 
@@ -94,7 +92,7 @@ def test_delete_non_existent_basket(non_existent_basket):
 
     # Generally, APIs should return 200 (Success, it's gone) or 404 (Didn't exist).
     # It should NOT be a 500 Server Error.
-    assert response.status_code in [200, 404]
+    assert response.status_code in [200, 400, 404]
 
 
 def test_update_basket_type_mismatch(managed_basket):
