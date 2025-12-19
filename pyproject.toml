@@ -23,4 +23,4 @@ exclude = ["tests*", "reports*", "assets*"]
 
 [tool.pytest.ini_options]
 pythonpath = "."
-addopts = "--html=report.html"
+addopts = ["--html=report.html","-v"]
