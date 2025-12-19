@@ -1,16 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
 [project]
-name = "fakeapi-testing"
+name = "Pantry_api-testing"
 version = "0.1.0"
-description = "Add your description here"
+description = "PantryAPI Testing Framework"
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "locust>=2.39.1",
     "pytest>=9.0.2",
-    "pytest-html>=4.1.1",
     "pytest-playwright>=0.7.2",
+    "pytest-html>=4.1.1",
     "requests>=2.32.5",
 ]
+
+[tool.setuptools.packages.find]
+# This tells setuptools to ONLY treat 'api_call' as a package
+include = ["api_call*"]
+# Explicitly ignore these folders so they aren't mistaken for code
+exclude = ["tests*", "reports*", "assets*"]
 
 [tool.pytest.ini_options]
 pythonpath = "."
